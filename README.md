@@ -14,6 +14,14 @@ A WebSocket bridge that lets **Tripo Studio** push AI-generated 3D models (FBX +
 
 ---
 
+## Architecture / 架构
+
+![Architecture](Resources/architecture.svg)
+
+Tripo Studio connects to a local WebSocket server (`ws://127.0.0.1:60620`, protocol `1.0.0`) hosted by the **Tripo3DUEBridge editor module**. JSON control frames carry the handshake, heartbeats and transfer acknowledgements, while binary frames carry the model payload — a JSON header followed by raw FBX bytes, split into 5 MiB chunks. Once a transfer completes, the plugin imports the model through UE 5.9's **Interchange** pipeline into `/Game/TripoModels`, auto-building PBR materials and wiring up textures. All traffic stays on localhost, and the editor-only module never ships into packaged games.
+
+> **中文：** Tripo Studio 通过本地 WebSocket（`ws://127.0.0.1:60620`）把模型推给编辑器模块：JSON 控制帧负责握手、心跳与确认，二进制帧按 5 MiB 分块传输 FBX；收齐后经 **Interchange** 导入 `/Game/TripoModels`，自动构建 PBR 材质并接好贴图。全程仅本机回环，模块只在编辑器中运行。
+
 ## Why this repo exists
 
 Tripo3D ships precompiled bridge binaries for UE 5.4 – 5.8. Those binaries **will not load on UE 5.9**:

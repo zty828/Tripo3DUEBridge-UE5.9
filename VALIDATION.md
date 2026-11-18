@@ -11,10 +11,12 @@ How to verify the Tripo3D UE Bridge actually works on **Unreal Engine 5.9**.
 | Compiles against UE 5.9 (BuildId 60351404) | ✅ | UBT build succeeded, editor module DLL linked |
 | Module loads in a UE 5.9 editor | ✅ | Runtime log: `InternalLoadLibrary 'Tripo3DUEBridge'` + `Tripo Bridge module started successfully` |
 | Interchange import API matches UE 5.9 headers | ✅ | `FrameAlignment` / `EInterchangeFrameAlignment::SnapToClosest` verified against 5.9 headers |
+| Offline protocol self-test (multi-chunk + SHA-256 integrity) | ✅ | `tools/selftest.py` vs `tools/mock_bridge.py` — runs in CI, no editor needed |
 | Live "push model → import" round-trip | ⏳ pending | Use the validator below when an editor is available |
 
-The first three are hard-verified. The live round-trip is exercised by the validator;
-it requires a running editor, so run it yourself with the steps below.
+The compile / module-load / API checks and the offline protocol self-test are hard-verified.
+The live round-trip is exercised by the validator; it requires a running editor, so run it
+yourself with the steps below.
 
 ## Prerequisites
 
@@ -112,3 +114,28 @@ python tools/check_repo.py
 Verifies the drop-in layout, the `.uplugin` manifest (including the Interchange dependency),
 license/provenance files, the precompiled binary, and that no PDB/Intermediate artifacts were
 committed. This is what the `validate` CI workflow runs on every push/PR.
+
+## Offline protocol self-test (no editor, runs in CI)
+
+```bash
+python tools/selftest.py
+```
+
+Exercises `tools/validate_bridge.py` end-to-end against `tools/mock_bridge.py`, a faithful
+standard-library mock of the bridge WebSocket protocol (same JSON control frames and
+JSON-header + raw-chunk binary frames, brace-counting split). **No Unreal Engine required.**
+
+It covers four cases and asserts end-to-end integrity:
+
+| Case | What it proves | Expected exit |
+| --- | --- | --- |
+| `ping_only` | handshake + heartbeat, engine-version assertion (`5.9`) | `0` |
+| `single_chunk` | one-chunk FBX transfer → `import_complete` | `0` |
+| `multi_chunk` | a >5 MiB payload split into 3 chunks, reassembled byte-for-byte (SHA-256 matches the source) | `0` |
+| `wrong_engine` | negative case: `--expect-engine 5.8` against a 5.9 mock must fail | `1` |
+
+The mock writes one JSON line per completed import (`bytes`, `chunks`, `sha256`); the
+self-test checks the reassembled SHA-256 equals the source payload for both the single- and
+multi-chunk cases. A final `SELFTEST={... "pass": true}` line and exit `0` mean all cases
+passed. The `validate` CI workflow runs this on every push/PR, so protocol regressions are
+caught without an editor.

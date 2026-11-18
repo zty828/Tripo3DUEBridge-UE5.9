@@ -47,6 +47,8 @@ REQUIRED = [
     "docs/ADAPTATION.md",
     "VALIDATION.md",
     "tools/validate_bridge.py",
+    "tools/mock_bridge.py",
+    "tools/selftest.py",
 ]
 for r in REQUIRED:
     check(exists(r), "required file present: " + r)
@@ -75,6 +77,13 @@ try:
     check(True, "tools/validate_bridge.py compiles")
 except Exception as e:
     check(False, "tools/validate_bridge.py compiles: " + repr(e))
+
+for t in ("tools/mock_bridge.py", "tools/selftest.py"):
+    try:
+        py_compile.compile(os.path.join(ROOT, t), doraise=True)
+        check(True, t + " compiles")
+    except Exception as e:
+        check(False, t + " compiles: " + repr(e))
 
 # no build intermediates / PDBs committed
 try:

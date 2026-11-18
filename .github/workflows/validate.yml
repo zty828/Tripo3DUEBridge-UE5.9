@@ -23,4 +23,7 @@ jobs:
         run: python tools/check_repo.py
 
       - name: Validator syntax check
-        run: python -m py_compile tools/validate_bridge.py
+        run: python -m py_compile tools/validate_bridge.py tools/mock_bridge.py tools/selftest.py
+
+      - name: Protocol self-test (mock bridge, no UE)
+        run: python tools/selftest.py
