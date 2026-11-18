@@ -1,0 +1,20 @@
+# UE build artifacts (regenerated on compile)
+Intermediate/
+Saved/
+DerivedDataCache/
+*.pdb
+*.exp
+*.ilk
+*.lib.tmp
+*.tmp
+
+# OS / editor cruft
+Thumbs.db
+Desktop.ini
+.DS_Store
+.vs/
+*.suo
+*.user
+
+# NOTE: Binaries/Win64/*.dll, *.modules, *.uclasses are intentionally committed
+# (drop-in precompiled editor binary). PDBs are excluded above.

@@ -1,0 +1,19 @@
+{
+  "BuildId": "60351404",
+  "Modules": {
+    "Tripo3DUEBridge": {
+      "Classes": [],
+      "Structs": [
+        "TripoFileTransferAckPayload",
+        "TripoFileTransferCompletePayload",
+        "TripoFileTransferPayload",
+        "TripoHandshakeAckPayload",
+        "TripoHandshakePayload",
+        "TripoImportCompletePayload"
+      ],
+      "Enums": [],
+      "Delegates": [],
+      "ScriptNames": {}
+    }
+  }
+}
