@@ -100,7 +100,7 @@ DLL 绑定 5.9 预览版 BuildId **60351404**——若你的 5.9 构建/hotfix �
 ## Pre-posting checklist (review notes — do not post)
 
 - [ ] Confirm the release page and the one-click zip link resolve while logged out.
-- [ ] Optional trust detail: zip is 1,892,314 bytes, SHA-256 `E75BC01AF3CB1BAE999E1E6529C7D7410C81B10DEF5636EC69DCA8A7F06F277D`.
+- [ ] Optional trust detail: Win64 zip is 1,892,569 bytes, SHA-256 `8021f855f91c87673990499597cce213d86a52f53bb858704d414b3e099d3bea`; Source zip is 1,425,623 bytes, SHA-256 `7b2c454e98bd3ec15ada7af0f12afb20aa5e0ca519a82de692a896debb5282cc`. Both are listed in `SHA256SUMS.txt` on the release.
 - [ ] Keep the "unofficial" label and the licensing paragraph in every version posted.
 - [ ] Do not claim the live Tripo Studio → import round-trip is verified; it is header-verified + validator self-tested only.
 - [ ] Post once per community (no cross-posting spam); answer questions in-thread.
