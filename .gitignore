@@ -8,6 +8,11 @@ DerivedDataCache/
 *.lib.tmp
 *.tmp
 
+# Python (validator tooling)
+__pycache__/
+*.pyc
+*.pyo
+
 # OS / editor cruft
 Thumbs.db
 Desktop.ini

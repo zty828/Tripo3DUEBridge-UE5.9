@@ -1,5 +1,11 @@
 # Tripo3D UE Bridge — UE5.9 Adaptation
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Release](https://img.shields.io/github/v/release/zty828/Tripo3DUEBridge-UE5.9?sort=semver)](https://github.com/zty828/Tripo3DUEBridge-UE5.9/releases)
+[![Validate](https://github.com/zty828/Tripo3DUEBridge-UE5.9/actions/workflows/validate.yml/badge.svg)](https://github.com/zty828/Tripo3DUEBridge-UE5.9/actions/workflows/validate.yml)
+![UE 5.9](https://img.shields.io/badge/Unreal%20Engine-5.9%20Preview-blue)
+![Platform](https://img.shields.io/badge/platform-Win64-lightgrey)
+
 **Unofficial community adaptation of the [Tripo3D](https://www.tripo3d.ai) UE Bridge plugin for Unreal Engine 5.9 (Preview).**
 
 A WebSocket bridge that lets **Tripo Studio** push AI-generated 3D models (FBX + PBR textures) straight into the Unreal Editor. Open the bridge window, push from Tripo Studio, and the model lands in your Content Browser with materials and textures wired up automatically.

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Tripo3D official site
+    url: https://www.tripo3d.ai
+    about: Official Tripo3D product and upstream plugin (this repo is an unofficial adaptation).
+  - name: Validation guide
+    url: https://github.com/zty828/Tripo3DUEBridge-UE5.9/blob/main/VALIDATION.md
+    about: How to verify the bridge on UE 5.9 before filing a bug.
